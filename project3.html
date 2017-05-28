@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Project 3</title>
+    <link rel="icon" href="dome.jpg">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="stylesheet.css">-->
+    <link rel="stylesheet" type="text/css" href="para.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<img id="back" src="GBIB_MS1_006R_MS_01_01_RGB-min.jpg">
+<div id="menudiv">
+    <ul id="menu">
+        <li data-menuanchor="ban"><a href="index.html">Home</a></li>
+        <li data-menuanchor="p1"><a href="anjou.html">Bible of Anjou</a></li>
+        <li data-menuanchor="p2"><a href="fingerprint.html">Fingerprint</a></li>
+        <li data-menuanchor="p3"><a href="project3.html">Project 3</a></li>
+        <li data-menuanchor="milkmaid"><a href="yellow_milk/milk.html">Yellow Milkmaid Syndrome</a></li>
+
+    </ul>
+</div>
+<p></p>
+<h2>Project 3</h2>
+
+<button class="accordion">Information</button>
+<div class="panel">
+    <div id="information">Placeholder for general information about project
+        <p></p>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, </p></div>
+    <div id="apibox">
+        <form id="searching">
+            Search Core articles
+            <input id="requestRef" type="text" value="" name="ref"> <!--start with breugel value but should be dynamic with the responding project-->
+            <span>
+                <button id="searchRef" onclick="return searchCore()">Search</button>
+            <span><div id="core"></div></span> <!--Inside the modal content: this is where the first three results of the api will be appended + empty before new search-->
+        </form>
+    </div>
+
+</div>
+
+<button class="accordion">Gallery</button>
+<div class="panel">
+    <div id="gallery">
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_01_RGB-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_02_IRG-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_03_IGB-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_04_RGU-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_04_RGU-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="GBIB_MS1_006R_MS_01_04_RGU-small.jpg">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

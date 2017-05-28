@@ -1,0 +1,293 @@
+body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+#menu li {
+    display:inline-block;
+    margin: 10px;
+    color: #000;
+    background:#fff;
+    background: rgba(64, 64, 64, 0.76);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#menu li.active{
+    background:#666;
+    background: rgba(0,0,0, 0.5);
+    color: #fff;
+}
+#menu li a{
+    text-decoration:none;
+    color: #ffffff;
+}
+#menu li.active a:hover{
+    color: #000;
+}
+#menu li:hover{
+    background: darkred;
+}
+#menu li a,
+#menu li.active a{
+    padding: 9px 18px;
+    display:block;
+}
+#menu li.active a{
+    color: #fff;
+}
+#menu{
+    position:fixed;
+    top:0;
+    left:0;
+    height: 40px;
+    z-index: 70;
+    width: 100%;
+    padding: 0;
+    margin:0;
+}
+
+#banner, #anjou, #fingerprint, #p3 {
+    height: 100%;
+    opacity: 0.67;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#banner {
+    background-image: url("dome.jpg");
+}
+
+#anjou {
+    background-image: url("GBIB_MS1_006R_MS_01_01_RGB-min.jpg");
+}
+
+#fingerprint {
+    background-image: url("NHD16_P_KBR_SII135128_TL_R_P1_1200_N (640x481).jpg");
+}
+
+#p3 {
+    background-image: url("The_Yellow_Milkmaid_Syndrome.PNG");
+}
+
+
+
+.visit {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
+
+/*.visit span.border {*/
+    /*background-color: #111;*/
+    /*color: #fff;*/
+    /*padding: 18px;*/
+    /*font-size: 25px;*/
+    /*letter-spacing: 10px;*/
+/*}*/
+
+.expl{
+    position: relative;
+    margin: auto;
+    left: 0;
+    top: 50%;
+    width: 40%;
+    text-align: center;
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+#home {
+    position: relative;
+    margin: auto;
+    left: 0;
+    top: 50%;
+    width: 40%;
+    text-align: center;
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+    opacity: 0.70;
+  }
+
+a {
+    text-decoration: none;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#back {
+    z-index: -1;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+}
+
+button.accordion {
+    background-color: rgba(48, 51, 52, 0.8);
+    color: #ffffff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    /*border: solid darkslategray;    /*border: solid darkslategray;*/
+    outline: none;
+    font-size: 30px;
+    transition: 0.4s;
+    text-align: center;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font-family: "Arial Black";
+
+
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: rgba(109, 8, 0, 0.8);
+    color: #ffffff
+
+}
+
+
+button.accordion.active:after {
+    content: "\25bc";
+    float: right;
+}
+
+button.accordion:after {
+content: "\25b2";
+    float: right;
+}
+
+
+div.panel {
+    padding: 0 18px;
+    background-color: rgba(255, 255, 255, 0.71);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+
+}
+
+
+#gallery {
+    background-color: #000000;
+}
+
+#information {
+    /*border: solid black;*/
+    float: left;
+    width: 45%;
+    text-align: justify;
+    margin-top: 1%;
+}
+
+
+#apibox {
+    /*border: solid black;*/
+    float: right;
+    width: 45%;
+    text-align: justify;
+}
+
+h2 {
+    padding-top: 5%;
+    text-align: center;
+    color: darkred;
+    font-size: 300%;
+
+
+}
+
+/*image gallery from w3schools: https://www.w3schools.com/css/tryit.asp?filename=trycss_image_gallery_responsive*/
+
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 20%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-left : 10%;
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+form {
+    padding-top: 2%;
+    margin-bottom: 2%;
+}
+
+#core {
+    margin-top: 2%;
+}
+/*#contri img {*/
+    /*height: 5%;*/
+    /*width: 20%;*/
+/*}*/
+/*#contri {*/
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*height: 10%;*/
+    /*background-color: black;*/
+    /*overflow: hidden;*/
+    /*display: block;*/
+    /*bottom: 0;*/
+/*}*/

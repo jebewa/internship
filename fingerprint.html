@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fingerprint Project</title>
+    <link rel="icon" href="dome.jpg">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="stylesheet.css">-->
+    <link rel="stylesheet" type="text/css" href="para.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<img id="back" src="NHD16_P_KBR_SII135128_TL_R_P1_1200_N (640x481).jpg">
+<div id="menudiv">
+    <ul id="menu">
+        <li data-menuanchor="ban"><a href="index.html">Home</a></li>
+        <li data-menuanchor="p1"><a href="anjou.html">Bible of Anjou</a></li>
+        <li data-menuanchor="p2"><a href="fingerprint.html">Fingerprint</a></li>
+        <li data-menuanchor="p3"><a href="project3.html">Project 3</a></li>
+        <li data-menuanchor="milkmaid"><a href="yellow_milk/milk.html">Yellow Milkmaid Syndrome</a></li>
+
+    </ul>
+</div>
+<p></p>
+<h2>Fingerprint</h2>
+
+<button class="accordion">Information</button>
+<div class="panel">
+    <div id="information"><b>Fingerprint</b>
+        <p>FINGERPRINT is an interdisciplinary collection and data management project, involving art history, art technical research, digital imaging, image processing and conservation science. The aim is to use advanced digital imaging, statistical processing and laboratory analyses to monitor and evaluate the phases of the genesis of a print, from preparatory drawings through proof impressions to later states and editions.
+            The exceptional collection of graphic works by Pieter Bruegel the Elder (ca. 1520-1569) in the Royal Library of Belgium forms a test corpus for the FINGERPRINT project. The tools and methods developed to gather and process the data will be designed to answer specific questions related not only to collection management, technical art history and conservation science but also to the production, distribution and consumption history of this body of works by Bruegel.
+        </p>
+        <p>
+            Up to now art historical research on prints and drawings has depended for the most part on traditional art historical methods based on observation with the naked eye and on the subjective memory and knowledge of connoisseurs. The aim of this project is to develop tools to automatically perform an objective artefact analysis and software to visualize, compare and order large quantities of complex visual and material data. Special processing algorithms will be developed to analyse visual data.
+        </p>
+        <p>
+            The four year project (2016-2020) is a collaboration of the <a href="https://www.kbr.be/en/reading-rooms/prints-reading-room" target="_blank">Print Room of the Royal Library of Belgium</a>
+            and three KU Leuven teams: <a href="https://bib.kuleuven.be/ub/digitalisering/digitaal-labo" target="_blank">the Imaging Lab</a>, <a href="https://www.esat.kuleuven.be/" target="_blank">ESAT</a> and <a href="http://illuminare.be/" target="_blank">Illuminare, Centre for the Study of Medieval Art</a>.
+            The research project is funded by <a href="http://www.belspo.be/belspo/index_en.stm" target="_blank">Belspo BRAIN-be</a> (Belgian Research Action through Interdisciplinary Networks). <a href="http://kikirpa.be/" target="_blank">The Royal Institute of Cultural Heritage</a> (KIKIRPA), Brussels and the international research project on the materials and techniques of Pieter Bruegel the Elder (<a href="https://www.khm.at/" target="_blank">KHM</a>, Vienna) are main research partners.
+        </p>
+    </div>
+    <div id="apibox"><form id="searching">
+        Search Core articles
+        <input id="requestRef" type="text" value="" name="ref"> <!--start with bruegel value but should be dynamic with the responding project-->
+        <span>
+                <button id="searchRef" onclick="return searchCore()">Search</button>
+            <span><div id="core"></div></span> <!--Inside the modal content: this is where the first three results of the api will be appended + empty before new search-->
+        </form> <!--api core search included in every page-->
+    </div>
+
+</div>
+
+<button class="accordion">Gallery</button>
+<div class="panel">
+    <div id="gallery">
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="https://c1.staticflickr.com/5/4204/34822415775_3ed976fbec_o.jpg" id="fourth_one" onclick="getThumb(this)">
+                </a>
+                <div class="desc">Pieter Bruegel. Justicia. Royal Library of Belgium. Detail: below right zone</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="viewer/imageviewer.html">
+                    <img src="https://c1.staticflickr.com/5/4270/33979141244_5a31bc2821_o.jpg" id="fifth_one" onclick="getThumb(this)">
+                </a>
+                <div class="desc">Pieter Bruegel. Temperantia. Royal Library of Belgium. General overview</div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+<!--<div id="contri">-->
+    <!--&lt;!&ndash;<img src="kul.png">&ndash;&gt;-->
+<!--</div>-->
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+
+<script type="application/javascript" src="viewer/imageviewer.js"></script>
+
+<!--Following script takes the id of the image that is selected from the gallery and stores it locally to know which image set to display in the viewer-->
+<!--see also: http://stackoverflow.com/questions/23620582/how-to-carry-over-the-result-of-an-onclick-event-to-another-page-->
+<script>
+    function getThumb(arg) {
+        var getOne = arg.id;
+        localStorage.setItem("myValue", getOne);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Anjou Bible</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="dome.jpg">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="stylesheet.css">-->
+    <link rel="stylesheet" type="text/css" href="para.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<img id="back" src="GBIB_MS1_006R_MS_01_01_RGB-min.jpg">
+<div id="menudiv">
+    <ul id="menu">
+        <li data-menuanchor="ban"><a href="index.html">Home</a></li>
+        <li data-menuanchor="p1"><a href="anjou.html">Bible of Anjou</a></li>
+        <li data-menuanchor="p2"><a href="fingerprint.html">Fingerprint</a></li>
+        <li data-menuanchor="p3"><a href="project3.html">Project 3</a></li>
+        <li data-menuanchor="milkmaid"><a href="yellow_milk/milk.html">Yellow Milkmaid Syndrome</a></li>
+
+    </ul>
+</div>
+<p></p>
+<h2>Bible of Anjou</h2>
+
+<button class="accordion">Information</button>
+<div class="panel">
+<div id="information">
+<p><b>The Bible of Anjou</b></p>
+    <p id="anjou_des">
+<p>
+    The Theology Faculty’s Maurits Sabbe Library at the KU Leuven contains an impressive collection of manuscripts, most of which originate from the Episcopal Seminary in Mechelen. The show-piece of the library collection is the fourteenth-century Anjou Bible. After peregrinations in royal circles, in 1509 the codex ended up on Brabantine soil where it has remained to this day. During the course of those 500 years, this unique manuscript fell into oblivion.
+</p>
+    <p>
+        The Anjou Bible, now kept in the Theology Faculty's Maurits Sabbe Library of the University of Leuven (Belgium) is a superbly illuminated manuscript created at the Royal Court of Naples in the turbulent fourteenth century. At this time much of Central and Southern Europe was governed by the successful dynasty of Anjou, which continued to expand its territories and encouraged artists and writers like Giotto, Simone Martini, Boccaccio and Petrarch. In 1328, after the death of her father, Joanna of Anjou became the official heir to the prosperous Kingdom of Naples and Sicily. Several years later her grandfather, Robert I, gave Joanna and her young fiancé Andrew of Hungary a precious gift, which became known as the Anjou Bible, a manuscript that is priceless from a historical and art-historical point of view. In addition to Bible texts and splendid miniatures, it contains a wealth of historical information about the house of Anjou and the book's origins. One of the artists responsible for the magnificent painting was Cristophorus Orimina, the leading illuminator in Naples, who signed the work.
+    </p>
+    <p>
+        You can access the bible online:
+        <br>
+        <a href="http://depot.lias.be/delivery/DeliveryManagerServlet?dps_pid=IE3562253" target="_blank">Discover the full Anjou Bible here</a>
+    </p>
+    </p>
+</div>
+<div id="apibox"><form id="searching">
+    Search Core articles
+    <input id="requestRef" type="text" value="" name="ref"> <!--start with bruegel value but should be dynamic with the responding project-->
+    <span>
+                <button id="searchRef" onclick="return searchCore()">Search</button>
+            <span><div id="core"></div></span> <!--Inside the modal content: this is where the first three results of the api will be appended + empty before new search-->
+</form>
+</div>
+
+</div>
+
+<button class="accordion">Gallery</button>
+<div class="panel">
+<div id="gallery">
+    <div class="responsive">
+        <div class="gallery">
+            <a href="viewer/imageviewer.html">
+                <img class="selections" src="https://c1.staticflickr.com/5/4275/34659336202_169aea364e_o.jpg" id="first_one" onclick="getThumb(this)">
+            </a>
+            <div class="desc">Anjou Bible (KU Leuven Libraries, Maurits Sabbe, Ms1). Folio 001v. Multispectral Microdome</div>
+        </div>
+    </div>
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a href="viewer/imageviewer.html">
+                <img class="selections" src="https://c1.staticflickr.com/5/4274/34689737831_a0a33140c5_o.jpg" id="second_one" onclick="getThumb(this)">
+            </a>
+            <div class="desc">Anjou Bible (KU Leuven Libraries, Maurits Sabbe, Ms1). Folio 230r. Multispectral Microdome</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <a href="viewer/imageviewer.html">
+                <img class="selections" src="https://c1.staticflickr.com/5/4177/34659331372_e53b835062_o.jpg" id="third_one" onclick="getThumb(this)">
+            </a>
+            <div class="desc">Anjou Bible (KU Leuven Libraries, Maurits Sabbe, Ms1). Folio 380r. Multispectral Microdome</div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+<script type="application/javascript" src="viewer/imageviewer.js"></script>
+
+<!--Following script takes the id of the image that is selected from the gallery and stores it locally to know which image set to display in the viewer-->
+<!--see also: http://stackoverflow.com/questions/23620582/how-to-carry-over-the-result-of-an-onclick-event-to-another-page-->
+<script>
+    function getThumb(arg) {
+        var getOne = arg.id;
+        localStorage.setItem("myValue", getOne);
+    }
+</script>
+
+
+</body>
+</html>
