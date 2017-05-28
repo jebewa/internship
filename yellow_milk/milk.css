@@ -1,0 +1,358 @@
+body {
+    text-align: center;
+    background-color: black;
+    font-family: sans-serif;
+}
+
+#menudiv {
+    float: right;
+}
+#menu li {
+    display:inline-block;
+    margin: 10px;
+    color: #000;
+    background:#fff;
+    background: rgba(64, 64, 64, 0.76);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    float: right;
+}
+#menu li.active{
+    background:#666;
+    background: rgba(0,0,0, 0.5);
+    color: #fff;
+    float: right;
+}
+#menu li a{
+    text-decoration:none;
+    color: #ffffff;
+    float: right;
+}
+#menu li.active a:hover{
+    color: #000;
+    float: right;
+}
+#menu li:hover{
+    background: darkred;
+    float: right;
+}
+#menu li a,
+#menu li.active a{
+    padding: 9px 18px;
+    display:block;
+    float: right;
+}
+#menu li.active a{
+    color: #fff;
+    float: right;
+}
+#menu{
+    position:inherit;
+    top:0;
+    left:0;
+    height: 40px;
+    z-index: 70;
+    width: 10%;
+    padding: 0;
+    margin:0;
+    float: right;
+}
+
+h1 {
+    color: #517a57;
+}
+/*Own fixed height and width for images*/
+img {
+    height: 562px;
+    width: 837px;
+    /*-webkit-user-drag: auto;*/
+}
+
+
+/*css for zoom and compare buttons which are together in a div element*/
+#zoom_compare {
+    color: white;
+    vertical-align: inherit;
+}
+#zooming {
+    margin-bottom: 5px;
+}
+
+#info {
+    background-color: black;
+    color: grey;
+    /*margin-left: 120px;*/
+    float: left;
+    display: inline-block;
+}
+
+/*[draggable=true] {*/
+    /*-webkit-user-drag: auto;*/
+    /*cursor: move;*/
+/*}*/
+#bright-contain {
+    float: left;
+    margin-top: 120px;
+    margin-left: 120px;
+}
+
+
+#brightness-slider {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 175px;
+    padding: 0 5px;
+
+}
+
+#brightness-up {
+    height: 40px;
+    width: 40px;
+
+}
+
+
+/*css for the white wall */
+#wall {
+    height: 680px;
+    width: 900px;
+    background-color: white;
+    margin-left: 240px;
+    -moz-border-radius: 6px;  /*Gives the wall corner a curved appearence*/
+    -webkit-border-radius:6px;
+    border-radius: 6px;
+}
+
+.image-diff {
+    position: relative;
+    overflow: hidden; /*--> hidden seems to make the hovering and zooming smoother, faster. Can also add scroll bars with overflow: scroll;*/
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+
+/*.image-diff:hover {-webkit-filter: brightness(250%); }*/
+
+
+.image-diff:after {
+    content: "Image 2";
+    right: 0;
+}
+
+
+.image-diff:before {
+    content: 'Image 1';
+    left: 0;
+}
+.image-diff:after,
+.image-diff:before {
+    display: inline-block;
+    position: absolute;
+    z-index: 9;
+    font-size: small;
+    text-shadow: 0 0 3px black;
+    font-weight: bold;
+    color: white;
+    opacity: .8;
+    top: 0;
+}
+
+
+.image-diff__inner {
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEX5+fn///8pDrwNAAAAFElEQVQI12NgsP/AQAz+f4CBGAwAJIIdTTn0+w0AAAAASUVORK5CYII=);*/
+    margin: 0;
+    position: absolute;
+}
+
+
+.image-diff__before {
+    box-shadow: 0 0 0 1px #f77;
+
+    right: 0;
+    margin: 0;
+    position: absolute;
+}
+
+
+.image-diff__after {
+    right: 0;
+    margin: 0;
+    position: absolute;
+}
+
+/* fix border color in left fade pos */
+.image-diff__inner--fade .image-diff__wrapper {
+    z-index: 1;
+    position: absolute;
+}
+
+.image-diff__wrapper {
+    box-shadow: 0 0 0 1px #63c363;
+    position: absolute;
+}
+
+.image-diff__mode-radio-group {
+    color: black;
+}
+
+
+
+/*css for thumbnails*/
+
+
+#selectImage {
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+.thumb {
+    height: 65px;
+    width: 80px;
+    margin-top: 40px;
+    margin-right: 30px;
+    border: 4px solid #ddd; /* Gray border */
+    border-radius: 8px;  /* Rounded border */
+    padding: 5px; /* Some padding */
+}
+
+/* Add a hover effect (blue shadow) */
+.thumb:hover {
+    box-shadow: 0 0 2px 3px rgba(13, 184, 186, 0.5);
+}
+
+
+/*
+ * difference mode
+ */
+.image-diff__inner--difference .image-diff__after img {
+    mix-blend-mode: difference;
+}
+
+.image-diff__inner--difference .image-diff__before,
+.image-diff__inner--difference .image-diff__after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+}
+
+.image-diff__inner--difference {
+    position: relative;
+    -webkit-filter: invert(1); /* white base color instead of black */
+}
+
+/*
+ * swipe mode
+ */
+
+.image-diff__inner--swipe .image-diff__wrapper {
+    box-shadow: -7px 0 10px -5px rgba(0,0,0,.5), 0 0 0 1px #63c363;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+}
+
+/*css for loadscreen --> might even be better with some loading interaction like pulsating text or a loading icon*/
+div#load_screen {
+    background: black;
+    opacity: 1;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+    height: 1600px;
+}
+div#load_screen > div#loading {
+    color: rgba(142, 142, 142, 0.34);
+    width: 120px;
+    height: 24px;
+    margin: 300px auto;
+    font-size: 2em;
+    text-align: center;
+
+}
+
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid rgba(142, 142, 142, 0.34); /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin-top: 100px;
+    align-content: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: flex;  /* Hidden by default */
+    position: inherit; /* Stay in place */
+    z-index: 11; /* Sit on top -->update: I've put the z-index even higher so it would also sit on top when fading to image 2; is now even higher than the loading screen*/
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    /*background-color: rgb(0,0,0); /* Fallback color */
+    /*background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    margin-bottom: 5%;
+}
+
+/*tried to place the modal left of the viewer but did not work, now try to get it on top*/
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    /*margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    height: 90%;
+    /*width: 80%; /* Could be more or less, depending on screen size */
+}
+
+
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 5px; /* put close button a little bit to the left*/
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#description {
+    width: 50%;
+    float: left;
+    text-align: left;
+    margin-left: 2%;
+    vertical-align: text-top;
+}
+
+#core {
+    width: 45%;                           /*do not put width at 50% for it will be placed under the descprition div*/
+    float: right;
+    text-align: left;
+    margin-bottom: 1.5%;
+}
+
+#searching, #requestRef, #searchRef {
+    margin-bottom: 1.5%;
+}

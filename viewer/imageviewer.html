@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- cleaned op the general structure of the html-page a bit and put all the style elements in the stylesheet, did result in making the slider smaller -->
+<head>
+    <link rel="icon" href="../dome.jpg">
+    <title>Image Comparison Viewer</title>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='imageviewer.css' type='text/css' charset='utf-8'>
+    <!--<link rel='stylesheet' href='../para.css' type='text/css' charset='utf-8'>-->
+    <!-- use of google api for icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+//        javascript for load screen which has to be in the head element; see https://www.youtube.com/watch?v=EA27xM71m0g
+        window.addEventListener("load", function () {
+            var load_screen = document.getElementById("load_screen")
+            document.body.removeChild(load_screen);
+        })
+    </script>
+    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+<!--div for load screen-->
+<div id="load_screen"><div id="loading">loading viewer<div class="loader"></div></div></div>
+
+<!--<h1>Own try-out with image diff view</h1>-->
+
+<!--<p><a href='https://github.com/a-x-/image-diff-view'>Checkout <b>image-diff-view</b> at <svg aria-hidden="true" class="octicon octicon-mark-github" height="28" version="1.1" viewBox="0 0 16 16" width="28"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg></a>-->
+
+
+<!-- Try-out with image type selector = alternative for the thumbnails -->
+<!--<span>Compare </span><select id='choice2' onchange="selecting (this);">-->
+    <!--<option value="false" selected="selected">none</option>-->
+    <!--<option value="data/GBIB_MS1_006R_MS_01_02_IRG.jpg">IRG</option>-->
+    <!--<option value="data/GBIB_MS1_006R_MS_01_03_IGB.jpg">IGB</option>-->
+<!--</select>-->
+<!--</div>-->
+
+<div id="menudiv">
+    <ul id="menu">
+        <li data-menuanchor="ban"><a href="../index.html">Home</a></li>
+    </ul>
+</div>
+
+
+<!-- Trigger/Open The Modal -->
+<span><button id="info"><i class="material-icons">info_outline</i></button></span>
+
+<!-- inspiration from https://www.w3schools.com/howto/howto_css_modals.asp -->
+<!-- The Modal -->
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="modal-content">
+    <span class="close">&times;</span>
+      <span><div id="description">
+          <div id="first_des">
+              <p><b>The Bible of Anjou</b></p>
+          <p style="text-align: justify">
+             The Theology Faculty’s Maurits Sabbe Library at the KU Leuven contains an impressive collection of manuscripts, most of which originate from the Episcopal Seminary in Mechelen. The show-piece of the library collection is the fourteenth-century Anjou Bible. After peregrinations in royal circles, in 1509 the codex ended up on Brabantine soil where it has remained to this day. During the course of those 500 years, this unique manuscript fell into oblivion.
+          </p>
+          <p style="text-align: justify">
+                The Anjou Bible, now kept in the Theology Faculty's Maurits Sabbe Library of the University of Leuven (Belgium) is a superbly illuminated manuscript created at the Royal Court of Naples in the turbulent fourteenth century. At this time much of Central and Southern Europe was governed by the successful dynasty of Anjou, which continued to expand its territories and encouraged artists and writers like Giotto, Simone Martini, Boccaccio and Petrarch. In 1328, after the death of her father, Joanna of Anjou became the official heir to the prosperous Kingdom of Naples and Sicily. Several years later her grandfather, Robert I, gave Joanna and her young fiancé Andrew of Hungary a precious gift, which became known as the Anjou Bible, a manuscript that is priceless from a historical and art-historical point of view. In addition to Bible texts and splendid miniatures, it contains a wealth of historical information about the house of Anjou and the book's origins. One of the artists responsible for the magnificent painting was Cristophorus Orimina, the leading illuminator in Naples, who signed the work.
+          </p>
+          <p>
+                You can access the bible online:
+                <br>
+                <a href="http://depot.lias.be/delivery/DeliveryManagerServlet?dps_pid=IE3562253" target="_blank">Discover the full Anjou Bible here</a>
+          </p>
+              <!--<p>-->
+                  <!--<b style="color: darkred">Spectra used</b>-->
+              <!--</p>-->
+      </div>
+      <div id="second_des"  >
+          <p><b>Fingerprint</b></p>
+        <p>FINGERPRINT is an interdisciplinary collection and data management project, involving art history, art technical research, digital imaging, image processing and conservation science. The aim is to use advanced digital imaging, statistical processing and laboratory analyses to monitor and evaluate the phases of the genesis of a print, from preparatory drawings through proof impressions to later states and editions.
+            The exceptional collection of graphic works by Pieter Bruegel the Elder (ca. 1520-1569) in the Royal Library of Belgium forms a test corpus for the FINGERPRINT project. The tools and methods developed to gather and process the data will be designed to answer specific questions related not only to collection management, technical art history and conservation science but also to the production, distribution and consumption history of this body of works by Bruegel.
+        </p>
+        <p>
+            Up to now art historical research on prints and drawings has depended for the most part on traditional art historical methods based on observation with the naked eye and on the subjective memory and knowledge of connoisseurs. The aim of this project is to develop tools to automatically perform an objective artefact analysis and software to visualize, compare and order large quantities of complex visual and material data. Special processing algorithms will be developed to analyse visual data.
+        </p>
+        <p>
+            The four year project (2016-2020) is a collaboration of the <a href="https://www.kbr.be/en/reading-rooms/prints-reading-room" target="_blank">Print Room of the Royal Library of Belgium</a>
+            and three KU Leuven teams: <a href="https://bib.kuleuven.be/ub/digitalisering/digitaal-labo" target="_blank">the Imaging Lab</a>, <a href="https://www.esat.kuleuven.be/" target="_blank">ESAT</a> and <a href="http://illuminare.be/" target="_blank">Illuminare, Centre for the Study of Medieval Art</a>.
+            The research project is funded by <a href="http://www.belspo.be/belspo/index_en.stm" target="_blank">Belspo BRAIN-be</a> (Belgian Research Action through Interdisciplinary Networks). <a href="http://kikirpa.be/" target="_blank">The Royal Institute of Cultural Heritage</a> (KIKIRPA), Brussels and the international research project on the materials and techniques of Pieter Bruegel the Elder (<a href="https://www.khm.at/" target="_blank">KHM</a>, Vienna) are main research partners.
+        </p>
+          <!--<p>-->
+              <!--<b style="color: darkred">Inventory Number and Light</b>-->
+          <!--</p>-->
+      </div>
+
+      </span></div>
+        <form id="searching">
+            Search Core articles
+            <input id="requestRef" type="text" value="" name="ref"> <!--start with bruegel value but should be dynamic with the responding project-->
+            <span>
+                <button id="searchRef" onclick="return searchCore()">Search</button>
+            <span><div id="core"></div></span> <!--Inside the modal content: this is where the first three results of the api will be appended + empty before new search-->
+        </form>
+        </div></span>
+    </div>
+
+
+</div>
+
+<!-- Can also include values for zoomin out like for example 75% but removed them for now -->
+<div id="zoom_compare">
+<span>Zoom </span>
+<select id='zooming' onchange="zoomings (this);">
+    <option value="100%" selected="selected">100%</option>
+    <option value="150%">150%</option>
+    <option value="200%">200%</option>
+    <option value="250%">250%</option>
+    <option value="300%">300%</option>
+    <option value="500%">500%</option>
+    <option value="700%">700%</option>
+</select>
+</div>
+
+<!--</div>-->
+<!--<div class="zoomers">-->
+    <!--<input type="range" orient="vertical" id="zoom-slider" min="1" max="10" step="0.5" value="1"> &lt;!&ndash;alternative for zooming with a slider &ndash;&gt; also back to one when changing image!-->
+<!--</div>-->
+<!--</div>-->
+
+<div id="bright-contain">
+<div class="brightness">
+    <img src="data/brightness.png" id="brightness-up">
+    <!-- brightness control slider. see http://jsfiddle.net/cjwprostar/0bdwzej0/ for slider and http://stackoverflow.com/questions/17754604/want-to-create-a-simple-image-brightness-control-slider for (parts of) code -->
+</div>
+<div class="brightness">
+    <input type="range" orient="vertical" id="brightness-slider" min="1" max="3" step="0.01" value="1">
+</div>
+</div>
+
+<!--Created another div around the images for a white 'wall' where the images are placed on &ndash;&gt; maybe better to zoom in on this div-->
+<div id="wall">
+
+<div class='image-diff' id='image-diff'>
+    <div class='image-diff__inner' id="image-diff__inner"> <!--draggable="true"-->
+
+        <div class='image-diff__before' id="image-diff__before">
+            <!-- Own fixed height and width for images, see css -->
+            <img id="im">
+        </div>
+        <div class='image-diff__wrapper' id="image-diff__wrapper">
+            <div class='image-diff__after' id="image-diff__after">
+                <img id="comp">
+            </div>
+        </div>
+    </div>
+</div>
+    <p><input type='range' class='image-diff__control' min='0' max='1' step='0.001' value='0.5'>
+    <div class='image-diff__mode-radio-group'>
+        <label><input name="mode" type="radio" value="difference"><span>difference</span></label>
+        <label><input name="mode" type="radio" value="fade"><span>fade</span></label>
+        <label><input name="mode" type="radio" value="swipe" checked=""><span>swipe</span></label>
+    </div>
+</div>
+
+
+<div id="thumbdiv"></div>
+<select id="selectImage" autofocus="autofocus">
+<option value="mainIm" selected="selected">Image 1</option>
+<option value="compIm">Image 2</option>
+</select>
+
+<!-- added a-tag with title to show title/image version when hovering over it -->
+<div id="thumbs1">
+
+    <div class="container">
+
+
+
+        <div class="thumbnail">
+            <a title="RGB"><img id="first_thumb" src="https://c1.staticflickr.com/5/4275/34659336202_169aea364e_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm G 523nm B 460nm</p>
+            </div>
+        </div>
+
+
+        <div class="thumbnail">
+            <a title="IRG"><img src="https://c1.staticflickr.com/5/4157/34689739161_4cac26ffe7_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, R 623nm, G 523nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="IGB"><img src="https://c1.staticflickr.com/5/4271/34659335852_e22755bd84_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, G 523nm, B 460nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="RGU"><img src="https://c1.staticflickr.com/5/4188/34689739131_b2139052ca_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm, G 523nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="GBU"><img src="https://c1.staticflickr.com/5/4194/34822411705_05f845ea04_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm, B 460nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="I"><img src="https://c1.staticflickr.com/5/4172/34689738531_97b8b23358_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="R"><img src="https://c1.staticflickr.com/5/4251/34822411665_9648698476_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="G"><img src="https://c1.staticflickr.com/5/4158/34659326562_d08e741bb8_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="B"><img src="https://c1.staticflickr.com/5/4172/34822411605_855b94e57c_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>B 460nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="U"><img src="https://c1.staticflickr.com/5/4183/34689730761_f4f31da04c_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>UV 365nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NI"><img src="https://c1.staticflickr.com/5/4179/34689737991_1692d0770a_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through IR 850nm light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NU"><img src="https://c1.staticflickr.com/5/4225/34822411495_8ac8a06b90_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through UV 365nm light</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="thumbs2">
+    <div class="container">
+
+
+
+        <div class="thumbnail">
+            <a title="RGB"><img id="second_thumb" src="https://c1.staticflickr.com/5/4274/34689737831_a0a33140c5_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm G 523nm B 460nm</p>
+            </div>
+        </div>
+
+
+        <div class="thumbnail">
+            <a title="IRG"><img src="https://c1.staticflickr.com/5/4270/34822411425_4e4a90b37f_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, R 623nm, G 523nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="IGB"><img src="https://c1.staticflickr.com/5/4228/34689739091_a8a443b947_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, G 523nm, B 460nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="RGU"><img src="https://c1.staticflickr.com/5/4228/34822411355_baf947c851_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm, G 523nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="GBU"><img src="https://c1.staticflickr.com/5/4168/34659333872_e6fdf393d7_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm, B 460nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="I"><img src="https://c1.staticflickr.com/5/4273/34689736901_a77890ffc5_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="R"><img src="https://c1.staticflickr.com/5/4182/34659333512_122b186868_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="G"><img src="https://c1.staticflickr.com/5/4245/34689736941_7401e91ffd_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="B"><img src="https://c1.staticflickr.com/5/4168/34689736271_658f113410_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>B 460nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="U"><img src="https://c1.staticflickr.com/5/4221/34689735441_fc50e176c8_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>UV 365nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NI"><img src="https://c1.staticflickr.com/5/4194/34659332112_17afb151f7_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through IR 850nm light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NU"><img src="https://c1.staticflickr.com/5/4178/34659331332_bb3bb883f5_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through UV 365nm light</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thumbs3">
+    <div class="container">
+
+
+
+        <div class="thumbnail">
+            <a title="RGB"><img id="third_thumb" src="https://c1.staticflickr.com/5/4177/34659331372_e53b835062_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm G 523nm B 460nm</p>
+            </div>
+        </div>
+
+
+        <div class="thumbnail">
+            <a title="IRG"><img src="https://c1.staticflickr.com/5/4243/34659331212_ff62152d0c_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, R 623nm, G 523nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="IGB"><img src="https://c1.staticflickr.com/5/4194/34822410385_bd3168236a_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm, G 523nm, B 460nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="RGU"><img src="https://c1.staticflickr.com/5/4164/34822410275_72401d0ce2_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm, G 523nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="GBU"><img src="https://c1.staticflickr.com/5/4167/34689730051_e6d6da1a89_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm, B 460nm, UV 365nm</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="I"><img src="https://c1.staticflickr.com/5/4184/34689732241_32c4c7d586_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>IR 850nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="R"><img src="https://c1.staticflickr.com/5/4186/34689731921_3c8b28ca87_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>R 623nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="G"><img src="https://c1.staticflickr.com/5/4176/34659328052_0cda293272_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>G 523nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="B"><img src="https://c1.staticflickr.com/5/4181/34689731531_d49bc21a32_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>B 460nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="U"><img src="https://c1.staticflickr.com/5/4158/33979126534_2b8acfbd71_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>UV 365nm</p>
+                <br>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NI"><img src="https://c1.staticflickr.com/5/4273/34659327372_db70d47e2f_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through IR 850nm light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="NU"><img src="https://c1.staticflickr.com/5/4248/34659325682_19be71829c_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Spectra used: </b>Texture generated through UV 365nm light</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="thumbs4">
+    <div class="container">
+
+
+
+        <div class="thumbnail">
+            <a title="General Light"><img id="fourth_thumb" src="https://c1.staticflickr.com/5/4204/34822415775_3ed976fbec_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>R-2009-10613</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Raking Light"><img src="https://c1.staticflickr.com/5/4193/34659350332_3285c75f91_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>R-2009-10613</p>
+                <p><b style="color:darkred">Inventory number: </b>Raking Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4173/34822415565_62dba4c511_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI10207</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Raking Light"><img src="https://c1.staticflickr.com/5/4172/34659350062_b78fdcca3f_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI10207</p>
+                <p><b style="color:darkred">Inventory number: </b>Raking Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4248/34822415285_554e449446_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SII135128</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Raking Light"><img src="https://c1.staticflickr.com/5/4267/34659349622_b145451e11_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SII135128</p>
+                <p><b style="color:darkred">Inventory number: </b>Raking Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4227/34822415125_2a6dc98b8d_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SII135128C</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Raking Light"><img src="https://c1.staticflickr.com/5/4195/34822414935_b8e419b56c_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SII135128C</p>
+                <p><b style="color:darkred">Inventory number: </b>Raking Light</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="thumbs5">
+
+    <div class="container">
+
+
+
+        <div class="thumbnail">
+            <a title="General Light"><img id="fifth_thumb" src="https://c1.staticflickr.com/5/4270/33979141244_5a31bc2821_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI7599</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Back Light"><img src="https://c1.staticflickr.com/5/4190/34435936600_90913e4dbe_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI7599</p>
+                <p><b style="color:darkred">Inventory number: </b>Back Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4195/33979140794_48d74661c6_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI10215</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Back Light"><img src="https://c1.staticflickr.com/5/4181/34435936130_afecaae6b1_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI10215</p>
+                <p><b style="color:darkred">Inventory number: </b>Back Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4250/34689753041_47bdd99bb2_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI23088</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Back Light"><img src="https://c1.staticflickr.com/5/4252/34435935600_bd787f2f7f_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI23088</p>
+                <p><b style="color:darkred">Inventory number: </b>Back Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="General Light"><img src="https://c1.staticflickr.com/5/4199/34822416065_32b2c2a7e9_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI135131</p>
+                <p><b style="color:darkred">Inventory number: </b>General Light</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <a title="Back Light"><img src="https://c1.staticflickr.com/5/4177/34689752561_83dc8cbb8f_o.jpg" onclick="changeIt(this)"></a>
+            <div class="caption">
+                <p><b style="color:darkred">Inventory number: </b>SI135131</p>
+                <p><b style="color:darkred">Inventory number: </b>Back Light</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="application/javascript" src="imageviewer.js"></script> <!-- NEED to call this js file after the html because otherwise it will give an error
+                                                                since the source of the images is not yet declared! -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- cleaned op the general structure of the html-page a bit and put all the style elements in the stylesheet, did result in making the slider smaller -->
+<head>
+    <link rel="icon" href="../dome.jpg">
+    <title>Image-diff-test</title>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='milk.css' type='text/css' charset='utf-8'>
+    <!-- use of google api for icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+//        javascript for load screen which has to be in the head element; see https://www.youtube.com/watch?v=EA27xM71m0g
+        window.addEventListener("load", function () {
+            var load_screen = document.getElementById("load_screen")
+            document.body.removeChild(load_screen);
+        })
+    </script>
+    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+
+
+</head>
+
+<body>
+<!--div for load screen-->
+<div id="load_screen"><div id="loading">loading viewer<div class="loader"></div></div></div>
+
+<!--<h1>Own try-out with image diff view</h1>-->
+
+<!--<p><a href='https://github.com/a-x-/image-diff-view'>Checkout <b>image-diff-view</b> at <svg aria-hidden="true" class="octicon octicon-mark-github" height="28" version="1.1" viewBox="0 0 16 16" width="28"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg></a>-->
+
+
+<!-- Try-out with image type selector = alternative for the thumbnails -->
+<!--<span>Compare </span><select id='choice2' onchange="selecting (this);">-->
+    <!--<option value="false" selected="selected">none</option>-->
+    <!--<option value="data/GBIB_MS1_006R_MS_01_02_IRG.jpg">IRG</option>-->
+    <!--<option value="data/GBIB_MS1_006R_MS_01_03_IGB.jpg">IGB</option>-->
+<!--</select>-->
+<!--</div>-->
+
+<div id="menudiv">
+    <ul id="menu">
+        <li data-menuanchor="ban"><a href="../index.html">Home</a></li>
+    </ul>
+</div>
+
+
+<!-- Trigger/Open The Modal -->
+<span><button id="info"><i class="material-icons">info_outline</i></button></span>
+
+<!-- inspiration from https://www.w3schools.com/howto/howto_css_modals.asp -->
+<!-- The Modal -->
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="modal-content">
+    <span class="close">&times;</span>
+      <p><b>The Yellow Milkmaid Syndrome</b></p>
+      <span><div id="description">
+          <p align="justify">Finding images of cultural heritage objects, such as paintings, is easier than ever. Simply feeding a search engine like Google or Bing the title of a painting will get you a tidal wave of images of that specific painting.  There is, however, one problem. The majority of images will be of low quality and are not guaranteed to accurately represent the original painting. This becomes problematic when inaccurate representations become more widespread than true images of the paintings.  In cultural heritage studies, this occurrence has been called “the Yellow Milkmaid Syndrome.” The term was coined by Europeana in 2011. The following image viewer serves to illustrate the Yellow Milkmaid Syndrome; to make the user aware of this challenge in digital cultural heritage research. </p>
+      </div></span>
+        <form id="searching">
+            Search heritage images from Bing
+            <input id="requestRef" type="text" value="Impression sunrise Monet" name="ref"> <!--start with breugel value but should be dynamic with the responding project-->
+            <span>
+                <button id="searchRef" onclick="return searchBing()">Search</button>
+            <span><div id="core"></div></span> <!--Inside the modal content: this is where the first three results of the api will be appended + empty before new search-->
+        </form>
+        </div></span>
+    </div>
+
+
+</div>
+
+<!-- Can also include values for zoomin out like for example 75% but removed them for now -->
+<div id="zoom_compare">
+<span>Zoom </span>
+<select id='zooming' onchange="zoomings (this);">
+    <option value="100%" selected="selected">100%</option>
+    <option value="150%">150%</option>
+    <option value="200%">200%</option>
+    <option value="250%">250%</option>
+    <option value="300%">300%</option>
+    <option value="500%">500%</option>
+    <option value="700%">700%</option>
+</select>
+</div>
+
+<div id="bright-contain">
+<div class="brightness">
+    <img src="data/brightness.png" id="brightness-up">
+    <!-- brightness control slider. see http://jsfiddle.net/cjwprostar/0bdwzej0/ for slider and http://stackoverflow.com/questions/17754604/want-to-create-a-simple-image-brightness-control-slider for (parts of) code -->
+</div>
+<div class="brightness">
+    <input type="range" orient="vertical" id="brightness-slider" min="1" max="3" step="0.01" value="1">
+</div>
+</div>
+
+<!--Created another div around the images for a white 'wall' where the images are placed on &ndash;&gt; maybe better to zoom in on this div-->
+<span><div id="wall">
+
+<div class='image-diff' id='image-diff'>
+    <div class='image-diff__inner' id="image-diff__inner"> <!--draggable="true"-->
+
+        <div class='image-diff__before' id="image-diff__before">
+            <!-- Own fixed height and width for images, see css -->
+            <img id="im" draggable="true">
+        </div>
+        <div class='image-diff__wrapper' id="image-diff__wrapper">
+            <div class='image-diff__after' id="image-diff__after">
+                <img id="comp" draggable="true">
+            </div>
+        </div>
+    </div>
+</div>
+    <p><input type='range' class='image-diff__control' min='0' max='1' step='0.001' value='0.5'>
+    <div class='image-diff__mode-radio-group'>
+        <label><input name="mode" type="radio" value="difference"><span>difference</span></label>
+        <label><input name="mode" type="radio" value="fade"><span>fade</span></label>
+        <label><input name="mode" type="radio" value="swipe" checked=""><span>swipe</span></label>
+    </div>
+</div>
+</span>
+
+
+<script type="application/javascript" src="milk.js"></script> <!-- NEED to call this js file after the html because otherwise it will give an error
+                                                                since the source of the images is not yet declared! -->
+
+</body>
+
+</html>
