@@ -228,7 +228,7 @@ else if(anjouChoice == "fifth_one") {
 function changeIt(element) {
     var selIm = document.getElementById("selectImage").value;
     console.log(element);
-    var descrip = element.alt;
+    // var descrip = element.alt; for potential append of image specific information to modal
     var thing = element.src;
     if (selIm === "mainIm") {
         document.getElementById('im').src = thing;
@@ -236,7 +236,7 @@ function changeIt(element) {
                                                               // description div and remove this again when a new one is selected
                                                               // in this case it is for the source of the image but you could also do it
                                                               // for a custom description for the image
-        jQuery("#description").append('<li id="list_first"><strong style="color:darkred"> Image 1: </strong>' + descrip + '</li>');
+        // jQuery("#description").append('<li id="list_first"><strong style="color:darkred"> Image 1: </strong>' + descrip + '</li>'); for potential append of image specific information to modal
         document.getElementById("brightness-slider").value = 1;   // set brightness back to 0 when image is changed
         if (document.getElementById("zooming").value !== "100%") {
             document.getElementById("zooming").value = "100%";        // Only when image 1 is changed: set zoom back to 100%
@@ -265,7 +265,7 @@ function changeIt(element) {
         document.getElementById('comp').src = thing;
         document.getElementById("image-diff").style.content = "Image 2";  //try to change content dynamically but does not work
         jQuery("#list_second").remove();
-        jQuery("#description").append('<li id="list_second"><strong style="color:darkred"> Image 2: </strong>' + descrip + '</li>');
+        // jQuery("#description").append('<li id="list_second"><strong style="color:darkred"> Image 2: </strong>' + descrip + '</li>'); for potential append of image specific information to modal
         document.getElementById("brightness-slider").value = 1;         // brightness back to 0 when im2 is changed
     }
     var bright = document.getElementById('im');
