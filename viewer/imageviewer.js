@@ -217,7 +217,7 @@ else if(anjouChoice == "fifth_one") {
     document.getElementById("first_des").style.display = "none";
     document.getElementById("second_des").style.display = "block";
 }
-else if(anjouChoice == "sixth_one") {
+if(anjouChoice == "sixth_one") {
     document.getElementById("thumbs6").style.display = "block";
     document.getElementById('im').src = document.getElementById('sixth_thumb').src;
     document.getElementById("first_des").style.display = "none";
