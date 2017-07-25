@@ -388,6 +388,10 @@ div#load_screen > div#loading {
     display: none;
 }
 
+#thumbs6 {
+    display: none;
+}
+
 /*Do the same thing with the thumbs as with the descriptions in the modal to make just one viewer page*/
 
 #fist_des {
