@@ -208,20 +208,16 @@ if(anjouChoice == "third_one") {
 if(anjouChoice == "fourth_one") {
     document.getElementById("thumbs4").style.display = "block";
     document.getElementById('im').src = document.getElementById('fourth_thumb').src;
-    document.getElementById("first_des").style.display = "none";
     document.getElementById("second_des").style.display = "block";
 }
 if(anjouChoice == "fifth_one") {
     document.getElementById("thumbs5").style.display = "block";
     document.getElementById('im').src = document.getElementById('fifth_thumb').src;
-    document.getElementById("first_des").style.display = "none";
     document.getElementById("second_des").style.display = "block";
 }
 if(anjouChoice == "sixth_one") {
     document.getElementById("thumbs6").style.display = "block";
     document.getElementById('im').src = document.getElementById('sixth_thumb').src;
-    document.getElementById("first_des").style.display = "none";
-    document.getElementById("second_des").style.display = "none";
     document.getElementById("third_des").style.display = "block";
 }
 
