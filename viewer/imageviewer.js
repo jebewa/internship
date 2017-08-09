@@ -195,12 +195,12 @@ if(anjouChoice == "first_one") {
     document.getElementById('im').src = document.getElementById('first_thumb').src;
     document.getElementById("first_des").style.display = "block";
 }
-else if (anjouChoice == "second_one") {
+if (anjouChoice == "second_one") {
     document.getElementById("thumbs2").style.display = "block";
     document.getElementById('im').src = document.getElementById('second_thumb').src;
     document.getElementById("first_des").style.display = "block";
 }
-else if(anjouChoice == "third_one") {
+if(anjouChoice == "third_one") {
     document.getElementById("thumbs3").style.display = "block";
     document.getElementById('im').src = document.getElementById('third_thumb').src;
     document.getElementById("first_des").style.display = "block";
@@ -211,7 +211,7 @@ if(anjouChoice == "fourth_one") {
     document.getElementById("first_des").style.display = "none";
     document.getElementById("second_des").style.display = "block";
 }
-else if(anjouChoice == "fifth_one") {
+if(anjouChoice == "fifth_one") {
     document.getElementById("thumbs5").style.display = "block";
     document.getElementById('im').src = document.getElementById('fifth_thumb').src;
     document.getElementById("first_des").style.display = "none";
