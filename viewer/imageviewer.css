@@ -394,7 +394,7 @@ div#load_screen > div#loading {
 
 /*Do the same thing with the thumbs as with the descriptions in the modal to make just one viewer page*/
 
-#fist_des {
+#first_des {
     display: none;
     text-align: justify;
 }
